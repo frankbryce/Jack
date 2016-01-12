@@ -1,7 +1,7 @@
 ﻿using System;
-using ConsoleApplication11.Model;
+using Jack.Model;
 
-namespace ConsoleApplication11.IntelligentEntity
+namespace Jack.IntelligentEntity
 {
     public abstract class IntelligentEntity<I, O>
     {

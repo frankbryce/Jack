@@ -7,8 +7,8 @@
     <ProjectGuid>{8E1C3B15-E7DE-491C-84CA-3810617512BB}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ConsoleApplication11</RootNamespace>
-    <AssemblyName>ConsoleApplication11</AssemblyName>
+    <RootNamespace>Jack</RootNamespace>
+    <AssemblyName>Jack</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="EnvironmentEntity\LookAheadEnvironment.cs" />
     <Compile Include="IntelligentEntity\Jack2.cs" />
+    <Compile Include="IntelligentEntity\MetaJack.cs" />
     <Compile Include="Printers\CompoundSimulatorPrinter.cs" />
     <Compile Include="Printers\ConsoleIntelligenceStatusPrinter.cs" />
     <Compile Include="Model\Contentment.cs" />

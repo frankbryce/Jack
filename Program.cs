@@ -1,11 +1,11 @@
 ﻿using System;
 using System.IO;
-using ConsoleApplication11.EnvironmentEntity;
-using ConsoleApplication11.IntelligentEntity;
-using ConsoleApplication11.Printers;
-using ConsoleApplication11.Simulator;
+using Jack.EnvironmentEntity;
+using Jack.IntelligentEntity;
+using Jack.Printers;
+using Jack.Simulator;
 
-namespace ConsoleApplication11
+namespace Jack
 {
     class Program
     {

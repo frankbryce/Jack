@@ -1,6 +1,6 @@
-using ConsoleApplication11.Model;
+using Jack.Model;
 
-namespace ConsoleApplication11.EnvironmentEntity
+namespace Jack.EnvironmentEntity
 {
     public class LookAheadEnvironment : EnvironmentEntity<uint, bool>
     {

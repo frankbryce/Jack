@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections;
-using ConsoleApplication11.Model;
+﻿using Jack.Model;
 
-namespace ConsoleApplication11.IntelligentEntity
+namespace Jack.IntelligentEntity
 {
     /// <summary>
     /// stupid stupid stupid... constant behavior with no adaptability.

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using ConsoleApplication11.Model;
+using Jack.Model;
 
-namespace ConsoleApplication11.IntelligentEntity
+namespace Jack.IntelligentEntity
 {
     /// <summary>
     /// Looks at it's history of answers, and decides what to

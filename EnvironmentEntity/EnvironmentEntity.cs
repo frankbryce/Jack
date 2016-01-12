@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using ConsoleApplication11.Model;
+﻿using Jack.Model;
 
-namespace ConsoleApplication11.EnvironmentEntity
+namespace Jack.EnvironmentEntity
 {
     public abstract class EnvironmentEntity<I, O>
     {

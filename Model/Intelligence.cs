@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace ConsoleApplication11.Model
+namespace Jack.Model
 {
     public struct Intelligence
     {

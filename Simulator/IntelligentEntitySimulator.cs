@@ -1,10 +1,10 @@
 ﻿using System.Threading;
-using ConsoleApplication11.EnvironmentEntity;
-using ConsoleApplication11.IntelligentEntity;
-using ConsoleApplication11.Model;
-using ConsoleApplication11.Printers;
+using Jack.EnvironmentEntity;
+using Jack.IntelligentEntity;
+using Jack.Model;
+using Jack.Printers;
 
-namespace ConsoleApplication11.Simulator
+namespace Jack.Simulator
 {
     public class IntelligentEntitySimulator<I, O>
     {

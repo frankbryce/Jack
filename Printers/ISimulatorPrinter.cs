@@ -1,7 +1,7 @@
-using ConsoleApplication11.EnvironmentEntity;
-using ConsoleApplication11.IntelligentEntity;
+using Jack.EnvironmentEntity;
+using Jack.IntelligentEntity;
 
-namespace ConsoleApplication11.Printers
+namespace Jack.Printers
 {
     public interface ISimulatorPrinter<I, O>
     {
