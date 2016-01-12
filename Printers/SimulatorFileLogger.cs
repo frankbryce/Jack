@@ -20,8 +20,8 @@ namespace ConsoleApplication11.Printers
 
         public void Print(IntelligentEntity<I, O> intelligentEntity, EnvironmentEntity<I, O> environmentEntity)
         {
-            File.WriteAllText(_filename, 
-                intelligentEntity.Input.Contentment+
+            File.AppendAllText(_filename, 
+                (intelligentEntity.Input?.Contentment ?? 0.0) +
                 ","+
                 intelligentEntity.CurrentContentment+
                 "\n");
