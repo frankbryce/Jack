@@ -19,7 +19,7 @@ namespace ConsoleApplication11.Simulator
             IntelligentEntity<I,O> intelligentEntity,
             EnvironmentEntity<I, O> environmentEntity,
             uint timeSteps,
-            int timeBetweenSteps=200)
+            int timeBetweenSteps = 0)
         {
             for (var t = 0; t < timeSteps; t++)
             {

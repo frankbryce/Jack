@@ -28,7 +28,7 @@ namespace ConsoleApplication11.IntelligentEntity
             _input = input;
             _output = NextOutput();
             _contentment =
-                _alpha * (input?.Contentment ?? 0.0) +
+                _alpha * input.Contentment +
                 (1.0 - _alpha) * _contentment;
         }
 

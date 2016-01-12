@@ -16,18 +16,18 @@ namespace ConsoleApplication11
                 .Parent
                 .FullName +
                 "/Data/"+
-                "out."+
-                DateTime.Now.ToString("yyyyMMddHHmmss")+
+                "out"+
+                //"."+DateTime.Now.ToString("yyyyMMddHHmmss")+
                 ".csv";
-            var entity = new Jack();
-            var environment = new NimbleEnvironment();
+            var entity = new Jack2();
+            var environment = new LookAheadEnvironment(4);
             var simulator = new IntelligentEntitySimulator<uint, bool>(
                 new CompoundSimulatorPrinter<uint, bool>(
                     new ConsoleIntelligenceStatusPrinter<uint, bool>(),
                     new SimulatorFileLogger<uint, bool>(dataFile)
                 )
             );
-            simulator.Run(entity, environment, 100, 0);
+            simulator.Run(entity, environment, 1500);
             Console.ReadLine();
         }
     }
