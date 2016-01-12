@@ -63,13 +63,13 @@ namespace Jack.IntelligentEntity
 
         public override string ToString() => Output.Object ? "dodge" : "straight";
 
-        private class OutTuple
+        public class OutTuple
         {
             public bool @out;
             public uint @in;
         }
 
-        private class Tuple<T1, T2>
+        public class Tuple<T1, T2>
         {
             public T1 Item1;
             public T2 Item2;
