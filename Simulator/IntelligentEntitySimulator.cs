@@ -1,8 +1,7 @@
 ﻿using System.Threading;
-using Jack.EnvironmentEntity;
-using Jack.IntelligentEntity;
+using Jack.Environment;
 using Jack.Model;
-using Jack.Printers;
+using Jack.Simulator.Printers;
 
 namespace Jack.Simulator
 {
@@ -34,7 +33,7 @@ namespace Jack.Simulator
 
             _printer.PrintIntelligence(intelligentEntity);
 
-            return new Intelligence(intelligentEntity.CurrentContentment.Value);
+            return intelligentEntity.CurrentContentment.Value;
         }
     }
 }
