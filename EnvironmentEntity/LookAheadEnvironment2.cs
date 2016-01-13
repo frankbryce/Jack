@@ -6,17 +6,9 @@ namespace Jack.EnvironmentEntity
     {
         protected override IntelligenceInput<uint> NextInput()
         {
-            uint nextInput;
-            if (Output.Object)
-            {
-                nextInput = ((Input.Object + 1) * 2) % 57;
-            }
-            else
-            {
-                nextInput = ((Input.Object + 2) * 3) % 61;
-            }
+            var nextInput = (Input.Object + 13) % 53;
 
-            var success = !(nextInput % 3 == 0 ^ Output.Object);
+            var success = !(nextInput % 2 == 0 ^ Output.Object);
             return new IntelligenceInput<uint>
             {
                 Contentment = success ? 1.0 : 0.0,
