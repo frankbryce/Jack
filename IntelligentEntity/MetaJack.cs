@@ -9,8 +9,9 @@ namespace Jack.IntelligentEntity
     {
         private readonly IntelligentEntity<uint, bool>[] _subEntities;
         private readonly List<Func<IntelligenceInput<uint>, IntelligenceInput<uint>>> _subEntityMaps;
-        private readonly Dictionary<byte, Dictionary<bool, List<Contentment>>> _outLookup;
-        private readonly List<bool> _memory;
+        private readonly Dictionary<int, Dictionary<bool, List<Contentment>>> _outLookup;
+        private readonly List<bool> _outMemory;
+        private readonly List<int> _hashMemory;
         private const int _memorySize = 10;
 
         public MetaJack(params IntelligentEntity<uint, bool>[] subEntities)
@@ -18,31 +19,32 @@ namespace Jack.IntelligentEntity
             _subEntities = subEntities;
             _subEntityMaps = new List<Func<IntelligenceInput<uint>, IntelligenceInput<uint>>>();
             var random = new Random((int) DateTime.Now.Ticks);
-            foreach (var i in _subEntities.Select(_ => random.Next(5)))
+            foreach (var i in _subEntities.Select(_ => random.Next(100)))
             {
                 _subEntityMaps.Add(input => new IntelligenceInput<uint>
                 {
-                    Object = (uint) (i + input.Object),
+                    Object = (uint) ((i + input.Object) % 100),
                     Contentment = input.Contentment
                 });
             }
 
-            _outLookup = new Dictionary<byte, Dictionary<bool, List<Contentment>>>();
-            _memory = new List<bool>(2);
+            _outLookup = new Dictionary<int, Dictionary<bool, List<Contentment>>>();
+            _outMemory = new List<bool>(2);
+            _hashMemory = new List<int>(2);
         }
 
-        private static byte Hash(uint @in, params bool[] @bools)
+        private static int Hash(uint @in, params bool[] @bools)
         {
-            var returnByte = (byte) (@in % 256);
+            var hash = @in;
             foreach (var @bool in @bools)
             {
-                returnByte <<= 1;
+                hash <<= 1;
                 if (@bool)
                 {
-                    returnByte |= 1;
+                    hash |= 1;
                 }
             }
-            return returnByte;
+            return (int)hash;
         }
 
         protected override IntelligenceOutput<bool> NextOutput()
@@ -63,14 +65,14 @@ namespace Jack.IntelligentEntity
             }
 
             // add element to history
-            if (_memory.Count == _memory.Capacity)
+            if (_outMemory.Count == _outMemory.Capacity)
             {
-                if(!_outLookup[hash].ContainsKey(_memory[0]))
+                if(!_outLookup[_hashMemory[0]].ContainsKey(_outMemory[0]))
                 {
-                    _outLookup[hash][_memory[0]] = new List<Contentment>();
+                    _outLookup[_hashMemory[0]][_outMemory[0]] = new List<Contentment>();
                 }
 
-                var list = _outLookup[hash][_memory[0]];
+                var list = _outLookup[_hashMemory[0]][_outMemory[0]];
                 list.Add(Input.Contentment);
                 if (list.Count > _memorySize)
                 {
@@ -78,7 +80,8 @@ namespace Jack.IntelligentEntity
                 }
 
                 // make room for the next Add()
-                _memory.RemoveAt(0);
+                _outMemory.RemoveAt(0);
+                _hashMemory.RemoveAt(0);
             }
 
             if (!_outLookup[hash].ContainsKey(true))
@@ -110,7 +113,8 @@ namespace Jack.IntelligentEntity
                 new IntelligenceOutput<bool> { Object = true } : 
                 new IntelligenceOutput<bool> { Object = false };
 
-            _memory.Add(output.Object);
+            _outMemory.Add(output.Object);
+            _hashMemory.Add(hash);
             return output;
         }
     }

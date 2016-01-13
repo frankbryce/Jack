@@ -19,8 +19,8 @@ namespace Jack
                 "out"+
                 //"."+DateTime.Now.ToString("yyyyMMddHHmmss")+
                 ".csv";
-            var entity = new MetaJack(new Jack2(), new Jack2());
-            var environment = new LookAheadEnvironment(4);
+            var entity = new MetaJack(new IntelligentEntity.Jack2(), new IntelligentEntity.Jack2());
+            var environment = new LookAheadEnvironment2();
             var simulator = new IntelligentEntitySimulator<uint, bool>(
                 new CompoundSimulatorPrinter<uint, bool>(
                     new ConsoleIntelligenceStatusPrinter<uint, bool>(),

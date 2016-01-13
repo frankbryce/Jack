@@ -43,7 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EnvironmentEntity\LookAheadEnvironment2.cs" />
     <Compile Include="EnvironmentEntity\LookAheadEnvironment.cs" />
+    <Compile Include="IntelligentEntity\Jack3.cs" />
     <Compile Include="IntelligentEntity\Jack2.cs" />
     <Compile Include="IntelligentEntity\MetaJack.cs" />
     <Compile Include="Printers\CompoundSimulatorPrinter.cs" />
