@@ -19,32 +19,48 @@
       // instantiates the pie chart, passes in the data and
       // draws it.
       function drawChart() {
-        var filename = "out.csv";
-        $.get(filename, function(csvData) {
-          var arrayData = $.csv.toArrays(csvData, {
-            onParseEntry: function(row){
-              for (var i=0;i<row.length;i++) {
-                if (!isNaN(row[i])) {
-                  row[i] = parseFloat(row[i]);
-                }
-              }
-              return row;
-            }
-          });
+        var numEntities = 10;
+        var numEnvironments = 10;
+        var barArrayData = [['Jack, Env', 'Intelligence']];
+        for(var i=0;i<numEntities;i++){
+          for(var j=0;j<numEnvironments; j++){
+            var filename = i + "/" + j + ".csv";
+            $.ajax({
+              url: filename, 
+              success: function(csvData) {
+                var arrayData = $.csv.toArrays(csvData, {
+                  onParseEntry: function(row){
+                    for (var i=0;i<row.length;i++) {
+                      if (!isNaN(row[i])) {
+                        row[i] = parseFloat(row[i]);
+                      }
+                    }
+                    return row;
+                  }
+                });
+                
+                var IntelRow = arrayData[arrayData.length-1];
+                var Intel = IntelRow[IntelRow.length-1];
+                barArrayData.push([i+","+j, Intel]);
+              },
+              dataType: 'text',
+              async: false
+            });
+          }
+        }
           
-          // Create the data table.
-          var data = new google.visualization.arrayToDataTable(arrayData);
-          
-          // Set chart options
-          var options = {
-            title: 'Jack',
-            legend: { position: 'bottom' }
-          };
-          
-          // Instantiate and draw our chart, passing in some options.
-          var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
-          chart.draw(data, options);
-        }, dataType='text');
+        // Create the data table.
+        var data = new google.visualization.arrayToDataTable(barArrayData);
+        
+        // Set chart options
+        var options = {
+          title: 'Jack X Env',
+          legend: { position: 'bottom' }
+        };
+        
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
       }
     </script>
   </head>

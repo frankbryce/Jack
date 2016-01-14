@@ -40,10 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entity\StatefulEnvironment.cs" />
     <Compile Include="EnvironmentEntity.cs" />
-    <Compile Include="Entity\LookAheadEnvironment.cs" />
-    <Compile Include="Entity\LookAheadEnvironment2.cs" />
-    <Compile Include="Entity\NimbleEnvironment.cs" />
+    <Compile Include="Entity\CyclicEnvironment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -2,7 +2,7 @@ using Jack.Model;
 
 namespace Jack.Environment.Entity
 {
-    public class LookAheadEnvironment2 : EnvironmentEntity<uint, bool>
+    public class CyclicEnvironment : EnvironmentEntity<uint, bool>
     {
         protected override IntelligenceInput NextInput()
         {

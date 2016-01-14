@@ -7,13 +7,8 @@ namespace Jack.Simulator
 {
     public class IntelligentEntitySimulator
     {
-        private ISimulatorPrinter _printer;
-        public IntelligentEntitySimulator(ISimulatorPrinter printer)
-        {
-            _printer = printer;
-        }
-
         public Intelligence Run(
+            ISimulatorPrinter printer,
             IntelligentEntity intelligentEntity,
             EnvironmentEntity environmentEntity,
             uint timeSteps,
@@ -26,11 +21,11 @@ namespace Jack.Simulator
 
                 intelligentEntity.Step(input);
                 environmentEntity.Step(output);
-                _printer.Print(intelligentEntity, environmentEntity);
+                printer.Print(intelligentEntity, environmentEntity);
                 if (timeBetweenSteps > 0) Thread.Sleep(timeBetweenSteps);
             }
 
-            _printer.PrintIntelligence(intelligentEntity);
+            printer.PrintIntelligence(intelligentEntity);
 
             return intelligentEntity.Contentment.Value;
         }
