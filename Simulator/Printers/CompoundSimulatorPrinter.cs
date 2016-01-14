@@ -2,16 +2,16 @@ using Jack.Environment;
 
 namespace Jack.Simulator.Printers
 {
-    public class CompoundSimulatorPrinter<I, O> : ISimulatorPrinter<I, O>
+    public class CompoundSimulatorPrinter : ISimulatorPrinter
     {
-        private readonly ISimulatorPrinter<I, O>[] _simulators;
+        private readonly ISimulatorPrinter[] _simulators;
 
-        public CompoundSimulatorPrinter(params ISimulatorPrinter<I, O>[] simulators)
+        public CompoundSimulatorPrinter(params ISimulatorPrinter[] simulators)
         {
             _simulators = simulators;
         }
 
-        public void Print(IntelligentEntity<I, O> intelligentEntity, EnvironmentEntity<I, O> environmentEntity)
+        public void Print(IntelligentEntity intelligentEntity, EnvironmentEntity environmentEntity)
         {
             foreach (var simulator in _simulators)
             {
@@ -19,7 +19,7 @@ namespace Jack.Simulator.Printers
             }
         }
 
-        public void PrintIntelligence(IntelligentEntity<I, O> intelligentEntity)
+        public void PrintIntelligence(IntelligentEntity intelligentEntity)
         {
             foreach(var simulator in _simulators)
             {

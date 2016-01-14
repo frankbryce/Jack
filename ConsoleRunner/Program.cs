@@ -4,6 +4,7 @@ using Jack.Entity;
 using Jack.Environment.Entity;
 using Jack.Simulator;
 using Jack.Simulator.Printers;
+using System.Configuration;
 
 namespace ConsoleRunner
 {
@@ -11,24 +12,30 @@ namespace ConsoleRunner
     {
         static void Main()
         {
-            var dataFile = Directory
-                .GetParent(Directory.GetCurrentDirectory())
-                .Parent
-                .FullName +
-                "/Data/"+
+            var datafileLocation = ConfigurationManager.AppSettings["DataFolderLocation"];
+            var dataFile = 
+                datafileLocation +
                 "out"+
                 //"."+DateTime.Now.ToString("yyyyMMddHHmmss")+
                 ".csv";
             var entity = new MetaJack(new Jack.Entity.Jack(), new Jack.Entity.Jack());
             var environment = new LookAheadEnvironment2();
             var simulator = new IntelligentEntitySimulator<uint, bool>(
-                new CompoundSimulatorPrinter<uint, bool>(
-                    new ConsoleIntelligenceStatusPrinter<uint, bool>(),
-                    new SimulatorFileLogger<uint, bool>(dataFile)
+                new CompoundSimulatorPrinter(
+                    new ConsoleIntelligenceStatusPrinter(),
+                    new SimulatorFileLogger(dataFile)
                 )
             );
             simulator.Run(entity, environment, 2500);
             Console.ReadLine();
+        }
+    }
+
+    public class Benchmark
+    {
+        public Benchmark()
+        {
+
         }
     }
 }

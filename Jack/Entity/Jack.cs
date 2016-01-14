@@ -9,7 +9,7 @@ namespace Jack.Entity
     /// </summary>
     public class Jack : IntelligentEntity<uint, bool>
     {
-        protected override IntelligenceOutput<bool> NextOutput()
+        protected override IntelligenceOutput NextOutput()
         {
             return new IntelligenceOutput<bool> {Object = Input.Object==0};
         }

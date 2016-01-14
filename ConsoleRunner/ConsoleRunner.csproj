@@ -33,7 +33,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -48,13 +53,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Environment\Jack.Environment.csproj">
       <Project>{0F93A06F-D248-410F-84C4-41CD3B73A5DE}</Project>
       <Name>Jack.Environment</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Jack.Model\Jack.Model.csproj">
+    <ProjectReference Include="..\Model\Jack.Model.csproj">
       <Project>{43A0802F-3A98-46AF-BB64-F6C8250324A0}</Project>
       <Name>Jack.Model</Name>
     </ProjectReference>

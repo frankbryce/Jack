@@ -11,7 +11,7 @@ namespace Jack.Environment.Entity
             _jumpAt = jumpAt;
         }
 
-        protected override IntelligenceInput<uint> NextInput()
+        protected override IntelligenceInput NextInput()
         {
             uint nextInput;
             if (Output.Object)

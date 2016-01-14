@@ -47,7 +47,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Jack.Model\Jack.Model.csproj">
+    <ProjectReference Include="..\Model\Jack.Model.csproj">
       <Project>{43A0802F-3A98-46AF-BB64-F6C8250324A0}</Project>
       <Name>Jack.Model</Name>
     </ProjectReference>

@@ -3,17 +3,17 @@ using Jack.Environment;
 
 namespace Jack.Simulator.Printers
 {
-    public class ConsoleIntelligenceStatusPrinter<I, O> : ISimulatorPrinter<I, O>
+    public class ConsoleIntelligenceStatusPrinter : ISimulatorPrinter
     {
-        public void Print(IntelligentEntity<I, O> intelligentEntity, EnvironmentEntity<I, O> environmentEntity)
+        public void Print(IntelligentEntity intelligentEntity, EnvironmentEntity environmentEntity)
         {
             Console.Write(environmentEntity.Input.Object + ": ");
-            Console.WriteLine(intelligentEntity + ", " + intelligentEntity.CurrentContentment);
+            Console.WriteLine(intelligentEntity + ", " + intelligentEntity.Contentment);
         }
 
-        public void PrintIntelligence(IntelligentEntity<I, O> intelligentEntity)
+        public void PrintIntelligence(IntelligentEntity intelligentEntity)
         {
-            Console.WriteLine("Intelligence: " + intelligentEntity.CurrentContentment);
+            Console.WriteLine("Intelligence: " + intelligentEntity.Contentment);
         }
     }
 }

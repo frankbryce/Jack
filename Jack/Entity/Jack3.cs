@@ -26,11 +26,11 @@ namespace Jack.Entity
             _random = new Random((int) DateTime.Now.Ticks);
         }
 
-        protected override IntelligenceOutput<bool> NextOutput()
+        protected override IntelligenceOutput NextOutput()
         {
             if (outs.Count > 1)
             {
-                outs[outs.Count-2].Item2 = Input.Contentment.Value >= CurrentContentment.Value;
+                outs[outs.Count-2].Item2 = Input.Contentment.Value >= Contentment.Value;
             }
 
             var listPositive = outs

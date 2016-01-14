@@ -3,7 +3,7 @@ using Jack.Environment;
 
 namespace Jack.Simulator.Printers
 {
-    public class SimulatorFileLogger<I, O> : ISimulatorPrinter<I, O>
+    public class SimulatorFileLogger : ISimulatorPrinter
     {
         private readonly string _filename;
         private int _time;
@@ -20,18 +20,18 @@ namespace Jack.Simulator.Printers
             _time = 0;
         }
 
-        public void Print(IntelligentEntity<I, O> intelligentEntity, EnvironmentEntity<I, O> environmentEntity)
+        public void Print(IntelligentEntity intelligentEntity, EnvironmentEntity environmentEntity)
         {
             File.AppendAllText(_filename,
                 (_time++) +
                 ","+
-                intelligentEntity.Input.Contentment +
+                intelligentEntity.Input.Contentment.Value +
                 ","+
-                intelligentEntity.CurrentContentment+
+                intelligentEntity.Contentment.Value +
                 "\n");
         }
 
-        public void PrintIntelligence(IntelligentEntity<I, O> intelligentEntity)
+        public void PrintIntelligence(IntelligentEntity intelligentEntity)
         {
             // do nothing
         }

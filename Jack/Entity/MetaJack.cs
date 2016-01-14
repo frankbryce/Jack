@@ -47,7 +47,7 @@ namespace Jack.Entity
             return (int)hash;
         }
 
-        protected override IntelligenceOutput<bool> NextOutput()
+        protected override IntelligenceOutput NextOutput()
         {
             var subOuts = new List<bool>();
             for(var i=0;i< _subEntities.Length;i++)

@@ -4,7 +4,7 @@ namespace Jack.Environment.Entity
 {
     public class LookAheadEnvironment2 : EnvironmentEntity<uint, bool>
     {
-        protected override IntelligenceInput<uint> NextInput()
+        protected override IntelligenceInput NextInput()
         {
             var nextInput = (Input.Object + 13) % 53;
 

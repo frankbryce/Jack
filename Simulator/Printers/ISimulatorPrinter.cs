@@ -2,12 +2,12 @@ using Jack.Environment;
 
 namespace Jack.Simulator.Printers
 {
-    public interface ISimulatorPrinter<I, O>
+    public interface ISimulatorPrinter
     {
         void Print(
-            IntelligentEntity<I, O> intelligentEntity,
-            EnvironmentEntity<I, O> environmentEntity);
+            IntelligentEntity intelligentEntity,
+            EnvironmentEntity environmentEntity);
         void PrintIntelligence(
-            IntelligentEntity<I, O> intelligentEntity);
+            IntelligentEntity intelligentEntity);
     }
 }

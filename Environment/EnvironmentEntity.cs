@@ -2,20 +2,43 @@
 
 namespace Jack.Environment
 {
-    public abstract class EnvironmentEntity<I, O>
+    public abstract class EnvironmentEntity
     {
-
-        private IntelligenceOutput<O> _output;
-        private IntelligenceInput<I> _input;
-
-        public void Step(IntelligenceOutput<O> output)
+        public void Step(IntelligenceOutput output)
         {
-            _output = output;
-            _input = NextInput();
+            Output = output;
+            Input = NextInput();
         }
 
-        public IntelligenceOutput<O> Output => _output;
-        public IntelligenceInput<I> Input => _input;
-        protected abstract IntelligenceInput<I> NextInput();
+        public IntelligenceOutput Output { get; protected set; }
+        public IntelligenceInput Input { get; protected set; }
+        protected abstract IntelligenceInput NextInput();
+    }
+
+    public abstract class EnvironmentEntity<I,O> : EnvironmentEntity
+    {
+        public new IntelligenceOutput<O> Output
+        {
+            get
+            {
+                return base.Output;
+            }
+            protected set
+            {
+                base.Output = value;
+            }
+        }
+
+        public new IntelligenceInput<I> Input
+        {
+            get
+            {
+                return base.Input;
+            }
+            protected set
+            {
+                base.Input = value;
+            }
+        }
     }
 }

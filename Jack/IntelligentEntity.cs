@@ -3,16 +3,11 @@ using Jack.Model;
 
 namespace Jack
 {
-    public abstract class IntelligentEntity<I, O>
+    public abstract class IntelligentEntity
     {
-        private readonly double _alpha;
-        private IntelligenceOutput<O> _output;
-        private IntelligenceInput<I> _input;
-        private Contentment _contentment;
-        
         protected IntelligentEntity(double alpha = 0.05)
         {
-            _contentment = 0.0;
+            Contentment = 0.0;
 
             if (alpha <= 0 || alpha >= 1)
             {
@@ -20,21 +15,49 @@ namespace Jack
                     nameof(alpha),
                     "alpha needs to be between 0 and 1, not inclusive");
             }
-            _alpha = alpha;
+            Alpha = alpha;
         }
 
-        public void Step(IntelligenceInput<I> input)
+        public void Step(IntelligenceInput input)
         {
-            _input = input;
-            _output = NextOutput();
-            _contentment =
-                _alpha * input.Contentment +
-                (1.0 - _alpha) * _contentment;
+            Input = input;
+            Output = NextOutput();
+            Contentment =
+                Alpha * input.Contentment +
+                (1.0 - Alpha) * Contentment;
         }
 
-        public IntelligenceOutput<O> Output => _output;
-        public IntelligenceInput<I> Input => _input;
-        public Contentment CurrentContentment => _contentment;
-        protected abstract IntelligenceOutput<O> NextOutput();
+        private double Alpha { get; }
+        public IntelligenceOutput Output { get; protected set; }
+        public IntelligenceInput Input { get; protected set; }
+        public Contentment Contentment { get; private set; }
+        protected abstract IntelligenceOutput NextOutput();
+    }
+
+    public abstract class IntelligentEntity<I, O> : IntelligentEntity
+    {
+        public new IntelligenceOutput<O> Output
+        {
+            get
+            {
+                return base.Output;
+            }
+            protected set
+            {
+                base.Output = value;
+            }
+        }
+
+        public new IntelligenceInput<I> Input
+        {
+            get
+            {
+                return base.Input;
+            }
+            protected set
+            {
+                base.Input = value;
+            }
+        }
     }
 }
