@@ -46,11 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entity\Jack3.cs" />
-    <Compile Include="Entity\Jack2.cs" />
-    <Compile Include="Entity\MetaJack.cs" />
-    <Compile Include="IntelligentEntity.cs" />
     <Compile Include="Entity\Jack.cs" />
+    <Compile Include="IntelligentEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
