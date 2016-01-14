@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using Jack.Model;
+using Jack.Utility;
 
 namespace Jack.Entity
 {
     public class MetaJack : IntelligentEntity<uint, bool>
     {
+        private readonly Hasher _hasher;
         private readonly IntelligentEntity<uint, bool>[] _subEntities;
         private readonly List<Func<IntelligenceInput<uint>, IntelligenceInput<uint>>> _subEntityMaps;
         private readonly Dictionary<int, Dictionary<bool, List<Contentment>>> _outLookup;
@@ -14,37 +16,22 @@ namespace Jack.Entity
         private readonly List<int> _hashMemory;
         private const int _memorySize = 10;
 
-        public MetaJack(params IntelligentEntity<uint, bool>[] subEntities)
+        public MetaJack(Hasher hasher, params IntelligentEntity<uint, bool>[] subEntities)
         {
+            _hasher = hasher;
             _subEntities = subEntities;
-            _subEntityMaps = new List<Func<IntelligenceInput<uint>, IntelligenceInput<uint>>>();
             var random = new Random((int) DateTime.Now.Ticks);
-            foreach (var i in _subEntities.Select(_ => random.Next(100)))
-            {
-                _subEntityMaps.Add(input => new IntelligenceInput<uint>
-                {
-                    Object = (uint) ((i + input.Object) % 100),
-                    Contentment = input.Contentment
-                });
-            }
+            _subEntityMaps = _subEntities.Select(_ => random.Next(100))
+                .Select<int, Func<IntelligenceInput<uint>, IntelligenceInput<uint>>>(i =>
+                    input => new IntelligenceInput<uint>
+                    {
+                        Object = (uint)((i + input.Object) % 100),
+                        Contentment = input.Contentment
+                    }).ToList();
 
             _outLookup = new Dictionary<int, Dictionary<bool, List<Contentment>>>();
             _outMemory = new List<bool>(2);
             _hashMemory = new List<int>(2);
-        }
-
-        private static int Hash(uint @in, params bool[] @bools)
-        {
-            var hash = @in;
-            foreach (var @bool in @bools)
-            {
-                hash <<= 1;
-                if (@bool)
-                {
-                    hash |= 1;
-                }
-            }
-            return (int)hash;
         }
 
         protected override IntelligenceOutput NextOutput()
@@ -58,7 +45,7 @@ namespace Jack.Entity
             }
 
             // get hash and add lookup if one doesn't exist yet
-            var hash = Hash(Input.Object, subOuts.ToArray());
+            var hash = _hasher.Hash(Input.Object).Hash(subOuts.ToArray()).Value;
             if (!_outLookup.ContainsKey(hash))
             {
                 _outLookup[hash] = new Dictionary<bool, List<Contentment>>();

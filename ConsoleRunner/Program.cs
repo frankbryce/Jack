@@ -5,6 +5,7 @@ using Jack.Environment.Entity;
 using Jack.Simulator;
 using Jack.Simulator.Printers;
 using System.Configuration;
+using Jack.Utility;
 
 namespace ConsoleRunner
 {
@@ -18,7 +19,7 @@ namespace ConsoleRunner
                 "out"+
                 //"."+DateTime.Now.ToString("yyyyMMddHHmmss")+
                 ".csv";
-            var entity = new MetaJack(new Jack.Entity.Jack(), new Jack.Entity.Jack());
+            var entity = new MetaJack(new Hasher(), new Jack.Entity.Jack(), new Jack.Entity.Jack());
             var environment = new LookAheadEnvironment2();
             var simulator = new IntelligentEntitySimulator<uint, bool>(
                 new CompoundSimulatorPrinter(
