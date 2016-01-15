@@ -3,13 +3,13 @@ using Jack.Utility;
 
 namespace Jack.Entity
 {
-    public class InputJack : BaseJack
+    public class OutputBufferJack : BaseBufferJack
     {
         protected override Hash State
         {
             get
             {
-                var hash = Hash.With(Input.Object);
+                var hash = Hash.With(Output.Object);
                 if (_subEntities.Any())
                 {
                     hash = hash.And(_subEntities.Select(x => x.Output.Object).ToArray());
@@ -18,7 +18,7 @@ namespace Jack.Entity
             }
         }
 
-        public InputJack(params IntelligentEntity<int, bool>[] subEntities) : base(subEntities)
+        public OutputBufferJack(int layer, params IntelligentEntity<int, bool>[] subEntities) : base(layer, subEntities)
         {
         }
     }

@@ -13,7 +13,7 @@ namespace Jack.Entity
                     .And(Output.Object);
                 if (_subEntities.Any())
                 {
-                    hash.And(_subEntities.Select(x => x.Output.Object).ToArray());
+                    hash = hash.And(_subEntities.Select(x => x.Output.Object).ToArray());
                 }
                 return hash;
             }

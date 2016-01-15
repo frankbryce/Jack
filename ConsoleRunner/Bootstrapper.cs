@@ -23,6 +23,28 @@ namespace ConsoleRunner
             kernel.Bind<IntelligentEntity>().ToConstant(
                 new Jack.Entity.InputOutputJack()
             );
+            kernel.Bind<IntelligentEntity>().ToConstant(
+                new Jack.Entity.InputJack(new Jack.Entity.InputBufferJack(1))
+            );
+            kernel.Bind<IntelligentEntity>().ToConstant(
+                new Jack.Entity.OutputJack(new Jack.Entity.OutputBufferJack(1, new Jack.Entity.OutputBufferJack(2)))
+            );
+            kernel.Bind<IntelligentEntity>().ToConstant(
+                new Jack.Entity.InputOutputJack(
+                    new Jack.Entity.InputOutputBufferJack(
+                        1,
+                        new Jack.Entity.InputBufferJack(2),
+                        new Jack.Entity.OutputBufferJack(2),
+                        new Jack.Entity.InputOutputBufferJack(2)
+                    ),
+                    new Jack.Entity.InputOutputBufferJack(
+                        1,
+                        new Jack.Entity.InputBufferJack(2),
+                        new Jack.Entity.OutputBufferJack(2),
+                        new Jack.Entity.InputOutputBufferJack(2)
+                    )
+                )
+            );
 
             //line up our environments
             kernel.Bind<EnvironmentEntity>().To<CyclicEnvironment>();

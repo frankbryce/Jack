@@ -3,7 +3,7 @@ using Jack.Utility;
 
 namespace Jack.Entity
 {
-    public class InputJack : BaseJack
+    public class InputBufferJack : BaseBufferJack
     {
         protected override Hash State
         {
@@ -18,7 +18,7 @@ namespace Jack.Entity
             }
         }
 
-        public InputJack(params IntelligentEntity<int, bool>[] subEntities) : base(subEntities)
+        public InputBufferJack(int layer, params IntelligentEntity<int, bool>[] subEntities) : base(layer, subEntities)
         {
         }
     }
