@@ -27,6 +27,8 @@ namespace Jack
                 (1.0 - Alpha) * Contentment;
         }
 
+        public abstract void Reset();
+
         private double Alpha { get; }
         public IntelligenceOutput Output { get; protected set; }
         public IntelligenceInput Input { get; protected set; }
@@ -38,26 +40,14 @@ namespace Jack
     {
         public new IntelligenceOutput<O> Output
         {
-            get
-            {
-                return base.Output;
-            }
-            protected set
-            {
-                base.Output = value;
-            }
+            get { return base.Output; }
+            protected set { base.Output = value; }
         }
 
         public new IntelligenceInput<I> Input
         {
-            get
-            {
-                return base.Input;
-            }
-            protected set
-            {
-                base.Input = value;
-            }
+            get { return base.Input; }
+            protected set { base.Input = value; }
         }
     }
 }

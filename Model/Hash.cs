@@ -27,11 +27,12 @@ namespace Jack.Utility
 
         public Hash And<T>(params T[] objs)
         {
+            var hash = new Hash(Value);
             foreach (var obj in objs)
             {
-                Value = Value * (obj.GetHashCode() + 3);
+                hash = hash * (obj.GetHashCode() + 3);
             }
-            return Value;
+            return hash;
         }
     }
 }

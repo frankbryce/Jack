@@ -22,5 +22,7 @@ namespace Jack.Utility
         }
 
         public new int Capacity { get; }
+
+        public bool IsFull => Count == Capacity;
     }
 }

@@ -10,6 +10,8 @@ namespace Jack.Environment
             Input = NextInput();
         }
 
+        public abstract void Reset();
+
         public IntelligenceOutput Output { get; protected set; }
         public IntelligenceInput Input { get; protected set; }
         protected abstract IntelligenceInput NextInput();

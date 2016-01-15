@@ -35,6 +35,9 @@ namespace ConsoleRunner
                 var j = 0;
                 foreach (var environment in _environments)
                 {
+                    entity.Reset();
+                    environment.Reset();
+
                     var dataFileLocation =
                         _datafileLocation +
                         "" + i + "/";
@@ -44,14 +47,19 @@ namespace ConsoleRunner
                     var dataFile = dataFileLocation +
                         "" + j +
                         ".csv";
-                    var logger = new SimulatorFileLogger(dataFile);
+                    var logger = new CompoundSimulatorPrinter(
+                        new ConsoleIntelligenceStatusPrinter(),
+                        new SimulatorFileLogger(dataFile)
+                    );
 
                     _simulator.Run(
                         logger,
                         entity,
                         environment,
                         timeSteps);
+                    j++;
                 }
+                i++;
             }
         }
     }
