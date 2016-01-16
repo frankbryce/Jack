@@ -11,6 +11,10 @@ namespace Jack.Utility
     {
         private Hash(int value)
         {
+            if (value == 0)
+            {
+                throw new ArgumentOutOfRangeException("Hash value cannot be 0");
+            }
             Value = value;
         }
 

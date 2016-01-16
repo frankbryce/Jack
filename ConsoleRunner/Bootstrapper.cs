@@ -1,4 +1,5 @@
 ﻿using Jack;
+using Jack.Entity;
 using Jack.Environment;
 using Jack.Environment.Entity;
 using Jack.Simulator;
@@ -15,41 +16,43 @@ namespace ConsoleRunner
 
             // line up our entities
             kernel.Bind<IntelligentEntity>().ToConstant(
-                new Jack.Entity.InputJack());
+                new InputJack());
             kernel.Bind<IntelligentEntity>().ToConstant(
-                new Jack.Entity.OutputJack());
-            kernel.Bind<IntelligentEntity>().ToConstant(
-                new Jack.Entity.InputOutputJack());
-            kernel.Bind<IntelligentEntity>().ToConstant(
-                new Jack.Entity.InOutMemoryJack(memorySize: 4));
-            kernel.Bind<IntelligentEntity>().ToConstant(
-                new Jack.Entity.InputJack(
-                    new Jack.Entity.InputJack(1),
-                    new Jack.Entity.InputJack(2),
-                    new Jack.Entity.InputJack(3),
-                    new Jack.Entity.InputJack(4)
-                ));
-            kernel.Bind<IntelligentEntity>().ToConstant(
-                new Jack.Entity.OutputJack(
-                    new Jack.Entity.OutputJack(1),
-                    new Jack.Entity.OutputJack(2),
-                    new Jack.Entity.OutputJack(3),
-                    new Jack.Entity.OutputJack(4)
-                ));
-            kernel.Bind<IntelligentEntity>().ToConstant(
-                new Jack.Entity.InputOutputJack(
-                    new Jack.Entity.InputOutputJack(1),
-                    new Jack.Entity.InputOutputJack(2),
-                    new Jack.Entity.InputOutputJack(3),
-                    new Jack.Entity.InputOutputJack(4)
-                ));
-            kernel.Bind<IntelligentEntity>().ToConstant(
-                new Jack.Entity.InOutMemoryJack(
-                    4,
-                    new Jack.Entity.InOutMemoryJack(memorySize: 4, bufferSize: 1),
-                    new Jack.Entity.InOutMemoryJack(memorySize: 4, bufferSize: 2),
-                    new Jack.Entity.InOutMemoryJack(memorySize: 4, bufferSize: 3),
-                    new Jack.Entity.InOutMemoryJack(memorySize: 4, bufferSize: 4)));
+                new NullJack(new InputJack()));
+            //kernel.Bind<IntelligentEntity>().ToConstant(
+            //    new OutputJack());
+            //kernel.Bind<IntelligentEntity>().ToConstant(
+            //    new InputOutputJack());
+            //kernel.Bind<IntelligentEntity>().ToConstant(
+            //    new InOutMemoryJack(memorySize: 4));
+            //kernel.Bind<IntelligentEntity>().ToConstant(
+            //    new InputJack(
+            //        new InputJack(1),
+            //        new InputJack(2),
+            //        new InputJack(3),
+            //        new InputJack(4)
+            //    ));
+            //kernel.Bind<IntelligentEntity>().ToConstant(
+            //    new OutputJack(
+            //        new OutputJack(1),
+            //        new OutputJack(2),
+            //        new OutputJack(3),
+            //        new OutputJack(4)
+            //    ));
+            //kernel.Bind<IntelligentEntity>().ToConstant(
+            //    new InputOutputJack(
+            //        new InputOutputJack(1),
+            //        new InputOutputJack(2),
+            //        new InputOutputJack(3),
+            //        new InputOutputJack(4)
+            //    ));
+            //kernel.Bind<IntelligentEntity>().ToConstant(
+            //    new InOutMemoryJack(
+            //        4,
+            //        new InOutMemoryJack(memorySize: 4, bufferSize: 1),
+            //        new InOutMemoryJack(memorySize: 4, bufferSize: 2),
+            //        new InOutMemoryJack(memorySize: 4, bufferSize: 3),
+            //        new InOutMemoryJack(memorySize: 4, bufferSize: 4)));
 
             //line up our environments
             kernel.Bind<EnvironmentEntity>().To<CyclicEnvironment>();
