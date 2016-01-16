@@ -7,14 +7,19 @@ namespace Jack.Simulator
 {
     public class IntelligentEntitySimulator
     {
+        private readonly int _timeSteps;
+
+        public IntelligentEntitySimulator(int timeSteps)
+        {
+            _timeSteps = timeSteps;
+        }
+
         public Intelligence Run(
             ISimulatorPrinter printer,
             IntelligentEntity intelligentEntity,
-            EnvironmentEntity environmentEntity,
-            uint timeSteps,
-            int timeBetweenSteps = 0)
+            EnvironmentEntity environmentEntity)
         {
-            for (var t = 0; t < timeSteps; t++)
+            for (var t = 0; t < _timeSteps; t++)
             {
                 var output = intelligentEntity.Output;
                 var input = environmentEntity.Input;
@@ -22,7 +27,6 @@ namespace Jack.Simulator
                 intelligentEntity.Step(input);
                 environmentEntity.Step(output);
                 printer.Print(intelligentEntity, environmentEntity);
-                if (timeBetweenSteps > 0) Thread.Sleep(timeBetweenSteps);
             }
 
             printer.PrintIntelligence(intelligentEntity);

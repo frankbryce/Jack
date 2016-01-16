@@ -8,7 +8,7 @@ namespace Jack.Entity
         private CacheList<Hash> _inOutHashMemory;
         private int _hashMemorySize;
 
-        protected override Hash State
+        public override Hash State
         {
             get
             {
@@ -29,13 +29,13 @@ namespace Jack.Entity
             base.Reset();
         }
 
-        public InOutMemoryJack(int memorySize=2, int bufferSize=0, params IntelligentEntity<int, bool>[] subEntities) : base(bufferSize, subEntities)
+        public InOutMemoryJack(int memorySize=2, int bufferSize=0, params BaseJack[] subEntities) : base(bufferSize, subEntities)
         {
             _hashMemorySize = memorySize;
             _inOutHashMemory = new CacheList<Hash>(_hashMemorySize);
         }
 
-        public InOutMemoryJack(int memorySize = 2, params IntelligentEntity<int, bool>[] subEntities) : this(memorySize, 0, subEntities)
+        public InOutMemoryJack(int memorySize = 2, params BaseJack[] subEntities) : this(memorySize, 0, subEntities)
         {}
     }
 }

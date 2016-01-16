@@ -13,12 +13,12 @@ namespace Jack.Simulator.Printers
             _filename = filename;
             File.WriteAllText(_filename,
                 "Time," +
-                "Input Object" +
-                "," +
+                //"Input Object" +
+                //"," +
                 "Output Object" +
                 "," +
-                "Input Contentment" +
-                "," +
+                //"Input Contentment" +
+                //"," +
                 "Internal Contentment" +
                 "\n");
             _time = 0;
@@ -29,12 +29,12 @@ namespace Jack.Simulator.Printers
             File.AppendAllText(_filename,
                 (_time++) +
                 "," +
-                (intelligentEntity.Input.Object ?? "0") +
+                //(intelligentEntity.Input.Object ?? "0") +
+                //"," +
+                (intelligentEntity.Output.Object == null ? "0" : ((bool)(intelligentEntity.Output.Object) ? "1" : "0")) +
                 "," +
-                (intelligentEntity.Output.Object ?? "False") +
-                "," +
-                intelligentEntity.Input.Contentment.Value +
-                ","+
+                //intelligentEntity.Input.Contentment.Value +
+                //","+
                 intelligentEntity.Contentment.Value +
                 "\n");
         }

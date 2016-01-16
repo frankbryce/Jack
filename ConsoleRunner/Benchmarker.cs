@@ -27,7 +27,7 @@ namespace ConsoleRunner
             _datafileLocation = ConfigurationManager.AppSettings["DataFolderLocation"];
         }
 
-        public void Run(uint timeSteps = 200)
+        public void Run()
         {
             var i = 0;
             foreach (var entity in _entities)
@@ -55,8 +55,7 @@ namespace ConsoleRunner
                     _simulator.Run(
                         logger,
                         entity,
-                        environment,
-                        timeSteps);
+                        environment);
                     j++;
                 }
                 i++;

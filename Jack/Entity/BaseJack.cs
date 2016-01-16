@@ -7,14 +7,14 @@ namespace Jack.Entity
 {
     public abstract class BaseJack : IntelligentEntity<int, bool>
     {
-        protected readonly List<IntelligentEntity<int, bool>> _subEntities;
+        protected readonly List<BaseJack> _subEntities;
         private Dictionary<Hash, CacheList<Contentment>> _outLookup;
         protected CacheList<Hash> _hashMemory;
         private const int _stateSize = 10;
         private const int _roundTripDelay = 2;
         private readonly CacheList<IntelligenceInput<int>> _inputBuffer;
 
-        protected BaseJack(int bufferSize, params IntelligentEntity<int, bool>[] subEntities)
+        protected BaseJack(int bufferSize, params BaseJack[] subEntities)
         {
             _subEntities = subEntities.ToList();
             _outLookup = new Dictionary<Hash, CacheList<Contentment>>();
@@ -85,6 +85,6 @@ namespace Jack.Entity
             return output;
         }
 
-        protected abstract Hash State { get; }
+        public abstract Hash State { get; }
     }
 }

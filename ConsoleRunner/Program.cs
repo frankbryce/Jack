@@ -9,7 +9,7 @@ namespace ConsoleRunner
             var kernel = Bootstrapper.Bootstrap();
 
             var benchmarker = kernel.Get<Benchmarker>();
-            benchmarker.Run(200);
+            benchmarker.Run();
         }
     }
 }

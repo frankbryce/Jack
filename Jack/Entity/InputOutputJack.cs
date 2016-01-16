@@ -5,7 +5,7 @@ namespace Jack.Entity
 {
     public class InputOutputJack : BaseJack
     {
-        protected override Hash State
+        public override Hash State
         {
             get
             {
@@ -19,11 +19,11 @@ namespace Jack.Entity
             }
         }
 
-        public InputOutputJack(int bufferSize, params IntelligentEntity<int, bool>[] subEntities) : base(bufferSize, subEntities)
+        public InputOutputJack(int bufferSize, params BaseJack[] subEntities) : base(bufferSize, subEntities)
         {
         }
 
-        public InputOutputJack(params IntelligentEntity<int, bool>[] subEntities) : this(0, subEntities)
+        public InputOutputJack(params BaseJack[] subEntities) : this(0, subEntities)
         {
         }
     }
