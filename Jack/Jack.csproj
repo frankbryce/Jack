@@ -47,6 +47,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entity\BaseJack.cs" />
+    <Compile Include="Entity\InputMemoryJack.cs" />
+    <Compile Include="Entity\OutputMemoryJack.cs" />
     <Compile Include="Entity\InOutMemoryJack.cs" />
     <Compile Include="Entity\CompositeJack.cs" />
     <Compile Include="Entity\InputOutputJack.cs" />

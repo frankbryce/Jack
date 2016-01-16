@@ -5,6 +5,8 @@ namespace Jack
 {
     public abstract class IntelligentEntity
     {
+        private double Alpha { get; }
+
         protected IntelligentEntity(double alpha = 0.05)
         {
             Contentment = 0.0;
@@ -21,30 +23,30 @@ namespace Jack
         public void Step(IntelligenceInput input)
         {
             Input = input;
-            Output = NextOutput();
             Contentment =
                 Alpha * input.Contentment +
                 (1.0 - Alpha) * Contentment;
+
+            Iterate();
         }
 
-        public abstract void Reset();
+        public virtual IntelligenceOutput Output { get; protected set; }
+        public virtual IntelligenceInput Input { get; protected set; }
+        public virtual Contentment Contentment { get; private set; }
 
-        private double Alpha { get; }
-        public IntelligenceOutput Output { get; protected set; }
-        public IntelligenceInput Input { get; protected set; }
-        public Contentment Contentment { get; private set; }
-        protected abstract IntelligenceOutput NextOutput();
+        public abstract void Reset();
+        protected abstract void Iterate();
     }
 
     public abstract class IntelligentEntity<I, O> : IntelligentEntity
     {
-        public new IntelligenceOutput<O> Output
+        public virtual new IntelligenceOutput<O> Output
         {
             get { return base.Output; }
             protected set { base.Output = value; }
         }
 
-        public new IntelligenceInput<I> Input
+        public virtual new IntelligenceInput<I> Input
         {
             get { return base.Input; }
             protected set { base.Input = value; }

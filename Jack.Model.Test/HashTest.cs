@@ -108,6 +108,21 @@ namespace Jack.Model.Test
         }
 
         [TestMethod]
+        public void ClonesShouldBeEqual()
+        {
+            var hash = Hash.FromInt(5678);
+            Assert.AreEqual(hash, (Hash) hash.Clone());
+            Assert.IsTrue(hash == hash.Clone());
+        }
+
+        [TestMethod]
+        public void ClonesShouldNotBeUnEqual()
+        {
+            var hash = Hash.FromInt(5678);
+            Assert.AreEqual(hash, hash.Clone());
+        }
+
+        [TestMethod]
         public void HashIdentityWithIdentityEqualsIdentity()
         {
             var hash1 = Hash.With(Hash.Identity);
@@ -118,9 +133,17 @@ namespace Jack.Model.Test
         }
 
         [TestMethod]
+        public void ZeroShouldNotBeAnIdentity()
+        {
+            var hash1 = Hash.FromInt(0).AndWith(1234);
+            var hash2 = Hash.With(1234);
+            Assert.AreNotEqual(hash1, hash2);
+        }
+
+        [TestMethod]
         public void ValueOfIdentityIsNotEqualToIdentity()
         {
-            Assert.AreNotEqual(Hash.FromInt(Hash.Identity), Hash.Identity);
+            Assert.IsFalse(Hash.FromInt(Hash.Identity) == Hash.Identity);
         }
 
         [TestMethod]

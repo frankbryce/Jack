@@ -24,9 +24,9 @@ namespace ConsoleRunner
 
             // line up our entities
             kernel.Bind<IntelligentEntity>().ToConstant(
-                new InputOutputJack());
+                new InputMemoryJack(2));
             kernel.Bind<IntelligentEntity>().ToConstant(
-                new CompositeJack(new InputJack(), new OutputJack()));
+                new CompositeJack(new InputJack(), new InputJack(1)));
 
             //line up our environments
             kernel.Bind<EnvironmentEntity>().To<CyclicEnvironment>();

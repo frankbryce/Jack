@@ -19,72 +19,77 @@ namespace Jack.Entity
             _subEntities = subEntities.ToList();
             _outLookup = new Dictionary<Hash, CacheList<Contentment>>();
             _inputBuffer = new CacheList<IntelligenceInput<int>>(bufferSize);
-            _hashMemory = new CacheList<Hash>(_roundTripDelay);
-            Reset();
+            _hashMemory = new CacheList<Hash>(_roundTripDelay + bufferSize);
+            State = Hash.Identity;
         }
 
         public override void Reset()
         {
-            _outLookup.Clear();
-            _hashMemory.Clear();
-            _inputBuffer.Clear();
-            State = default(Hash);
-
             foreach (var subEntity in _subEntities)
             {
                 subEntity.Reset();
             }
+
+            _outLookup.Clear();
+            _inputBuffer.Clear();
+            _hashMemory.Clear();
+            State = Hash.Identity;
         }
 
-        protected override IntelligenceOutput NextOutput()
+        protected override void Iterate()
         {
-            if (_inputBuffer.IsFull)
+            try
             {
-                for (var i = 0; i < _subEntities.Count; i++)
+                if (_inputBuffer.IsFull)
                 {
-                    // if buffer is empty, and "IsFull" then there is no buffer
-                    // and so we throw in non-buffered input
-                    _subEntities[i].Step(_inputBuffer.Any() ? _inputBuffer.First() : Input);
+                    for (var i = 0; i < _subEntities.Count; i++)
+                    {
+                        // if buffer is empty, and "IsFull" then there is no buffer
+                        // and so we throw in non-buffered input
+                        _subEntities[i].Step(Input);
+                    }
+
+                    // get hash and add lookup if one doesn't exist yet
+                    var hash = State = GetState();
+                    var hashIfTrue = hash.AndWith(true);
+                    var hashIfFalse = hash.AndWith(false);
+                    if (!_outLookup.ContainsKey(hashIfTrue))
+                    {
+                        _outLookup[hashIfTrue] = new CacheList<Contentment>(_stateSize);
+                    }
+                    if (!_outLookup.ContainsKey(hashIfFalse))
+                    {
+                        _outLookup[hashIfFalse] = new CacheList<Contentment>(_stateSize);
+                    }
+
+                    // add element to history
+                    if (_hashMemory.IsFull)
+                    {
+                        var list = _outLookup[_hashMemory.First()]; //FIFO
+                        list.Add(Input.Contentment);
+                    }
+
+                    var trueAverageContentment = _outLookup[hashIfTrue]
+                        .Select(x => x.Value)
+                        .Concat(_outLookup[hashIfFalse].Select(x => 1 - x.Value))
+                        .AverageOrDefault(0.5);
+
+                    var falseAverageContentment = _outLookup[hashIfFalse]
+                        .Select(x => x.Value)
+                        .Concat(_outLookup[hashIfTrue].Select(x => 1 - x.Value))
+                        .AverageOrDefault(0.5);
+
+                    Output = trueAverageContentment >= falseAverageContentment ?
+                        new IntelligenceOutput<bool> { Object = true } :
+                        new IntelligenceOutput<bool> { Object = false };
+
+                    _hashMemory.Add(hash.AndWith(Output.Object));
                 }
             }
-            _inputBuffer.Add(Input); // If size 0, essentially a no-op
-
-            // get hash and add lookup if one doesn't exist yet
-            var hash = State = GetState();
-            var hashIfTrue = hash.AndWith(true);
-            var hashIfFalse = hash.AndWith(false);
-            if (!_outLookup.ContainsKey(hashIfTrue))
+            finally
             {
-                _outLookup[hashIfTrue] = new CacheList<Contentment>(_stateSize);
+                _inputBuffer.Add(Input); // If size 0, essentially a no-op
             }
-            if (!_outLookup.ContainsKey(hashIfFalse))
-            {
-                _outLookup[hashIfFalse] = new CacheList<Contentment>(_stateSize);
-            }
-
-            // add element to history
-            if (_hashMemory.IsFull)
-            {
-                var list = _outLookup[_hashMemory.First()]; //FIFO
-                list.Add(Input.Contentment);
-            }
-
-            var trueAverageContentment = _outLookup[hashIfTrue]
-                .Select(x => x.Value)
-                .Concat(_outLookup[hashIfFalse].Select(x => 1 - x.Value))
-                .AverageOrDefault(0.5);
-
-            var falseAverageContentment = _outLookup[hashIfFalse]
-                .Select(x => x.Value)
-                .Concat(_outLookup[hashIfTrue].Select(x => 1 - x.Value))
-                .AverageOrDefault(0.5);
-
-            var output = trueAverageContentment >= falseAverageContentment ? 
-                new IntelligenceOutput<bool> { Object = true } : 
-                new IntelligenceOutput<bool> { Object = false };
-
-            _hashMemory.Add(hash.AndWith(output.Object));
-            return output;
         }
 
         protected virtual Hash GetState()
@@ -98,5 +103,7 @@ namespace Jack.Entity
         }
 
         public Hash State { get; private set; }
+
+        public override IntelligenceInput<int> Input => _inputBuffer.Any() ? _inputBuffer.First() : base.Input;
     }
 }

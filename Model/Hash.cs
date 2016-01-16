@@ -3,7 +3,7 @@
 namespace Jack.Utility
 {
 
-    public struct Hash : ICloneable
+    public struct Hash : IEquatable<Hash>, ICloneable
     {
         private bool _isIdentity;
         private int _value;
@@ -21,6 +21,19 @@ namespace Jack.Utility
 
         public static implicit operator int(Hash hash) => hash.GetHashCode();
         public static implicit operator Hash(int value) => FromInt(value);
+        public static bool operator !=(Hash h1, Hash h2) => !h1.Equals(h2);
+        public static bool operator ==(Hash h1, Hash h2) => h1.Equals(h2);
+        public bool Equals(Hash h)
+        {
+            long myValue = ((_isIdentity ? 0x1 : 0x0) << 31) + _value;
+            long theirValue = ((h._isIdentity ? 0x1 : 0x0) << 31) + h._value;
+            return myValue == theirValue;
+        }
+        public override bool Equals(object h)
+        {
+            if (h.GetType() != typeof(Hash)) { return false; }
+            return Equals((Hash)h);
+        }
         public static Hash Identity => new Hash(0, IsIdentity: true);
 
         public static Hash With<T>(params T[] objs)
@@ -28,22 +41,12 @@ namespace Jack.Utility
             return Identity.AndWith(objs);
         }
 
-        public Hash AndWith(params Hash[] objs)
-        {
-            var hash = (Hash)Clone();
-            foreach (var obj in objs)
-            {
-                if (obj == Identity) continue;
-                hash = HashFunc(obj, hash);
-            }
-            return hash;
-        }
-
         public Hash AndWith<T>(params T[] objs)
         {
-            var hash = (Hash) Clone();
+            var hash = Clone();
             foreach (var obj in objs)
             {
+                if (typeof(T) == typeof(Hash) && Identity.Equals(obj)) continue;
                 hash = HashFunc(new Hash(obj.GetHashCode()), hash);
             }
             return hash;
@@ -55,7 +58,7 @@ namespace Jack.Utility
             if (h2 == Identity) return h1;
 
             if (h1 == h2) h1 = -h2;
-            return (h1 - h2) * 14107;
+            return (h1 - h2);
         }
 
         public override int GetHashCode()
@@ -63,9 +66,14 @@ namespace Jack.Utility
             return _value;
         }
 
-        public object Clone()
+        public Hash Clone()
         {
             return new Hash(_value, _isIdentity);
+        }
+
+        object ICloneable.Clone()
+        {
+            return Clone();
         }
     }
 }
