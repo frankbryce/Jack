@@ -43,18 +43,18 @@
                 var Intel = IntelRow[IntelRow.length-1];
                 barArrayData.push([i+","+j, Intel]);
           
-                // Create the data table.
-                var linedata = new google.visualization.arrayToDataTable(arrayData);
-                
-                // Set chart options
-                var lineoptions = {
-                  title: 'Jack vs Time',
-                  legend: { position: 'bottom' }
-                };
-                
-                // Instantiate and draw our chart, passing in some options.
-                var linechart = new google.visualization.LineChart(document.getElementById(i+'_'+j));
-                linechart.draw(linedata, lineoptions);
+                //// Create the data table.
+                //var linedata = new google.visualization.arrayToDataTable(arrayData);
+                //
+                //// Set chart options
+                //var lineoptions = {
+                //  title: 'Jack vs Time',
+                //  legend: { position: 'bottom' }
+                //};
+                //
+                //// Instantiate and draw our chart, passing in some options.
+                //var linechart = new google.visualization.LineChart(document.getElementById(i+'_'+j));
+                //linechart.draw(linedata, lineoptions);
               },
               dataType: 'text',
               async: false

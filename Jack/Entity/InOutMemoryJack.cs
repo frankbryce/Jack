@@ -3,7 +3,7 @@ using Jack.Utility;
 
 namespace Jack.Entity
 {
-    public class MemoryJack : BaseJack
+    public class InOutMemoryJack : BaseJack
     {
         private CacheList<Hash> _inOutHashMemory;
         private int _hashMemorySize;
@@ -29,13 +29,13 @@ namespace Jack.Entity
             base.Reset();
         }
 
-        public MemoryJack(int memorySize=2, int bufferSize=0, params IntelligentEntity<int, bool>[] subEntities) : base(bufferSize, subEntities)
+        public InOutMemoryJack(int memorySize=2, int bufferSize=0, params IntelligentEntity<int, bool>[] subEntities) : base(bufferSize, subEntities)
         {
             _hashMemorySize = memorySize;
             _inOutHashMemory = new CacheList<Hash>(_hashMemorySize);
         }
 
-        public MemoryJack(int memorySize = 2, params IntelligentEntity<int, bool>[] subEntities) : this(memorySize, 0, subEntities)
+        public InOutMemoryJack(int memorySize = 2, params IntelligentEntity<int, bool>[] subEntities) : this(memorySize, 0, subEntities)
         {}
     }
 }

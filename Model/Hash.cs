@@ -30,7 +30,9 @@ namespace Jack.Utility
             var hash = new Hash(Value);
             foreach (var obj in objs)
             {
-                hash = hash * (obj.GetHashCode() + 3);
+                var val = obj.GetHashCode();
+                if (val == hash) val = -hash;
+                hash = (val - hash) * 14107;
             }
             return hash;
         }

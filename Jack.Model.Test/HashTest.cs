@@ -16,12 +16,12 @@ namespace Jack.Model.Test
         [TestMethod]
         public void CommutativeProperty()
         {
-            Assert.AreEqual(
+            Assert.AreNotEqual(
                     Hash.With(5).AndWith(55),
                     Hash.With(55).AndWith(5)
                 );
 
-            Assert.AreEqual(
+            Assert.AreNotEqual(
                     Hash.With(55).AndWith(555).AndWith(5).AndWith(5555),
                     Hash.With(555).AndWith(5).AndWith(5555).AndWith(55)
                 );
@@ -29,12 +29,12 @@ namespace Jack.Model.Test
             var ints1 = new[] { 888888888, 8, 88888 };
             var ints2 = new[] { 8, 88888, 888888888 };
 
-            Assert.AreEqual(
+            Assert.AreNotEqual(
                     Hash.With(ints1),
                     Hash.With(ints2)
                 );
 
-            Assert.AreEqual(
+            Assert.AreNotEqual(
                     Hash.With(ints1).AndWith(ints2),
                     Hash.With(ints2).AndWith(ints1)
                 );
