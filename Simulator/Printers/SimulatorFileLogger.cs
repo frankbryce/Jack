@@ -29,9 +29,9 @@ namespace Jack.Simulator.Printers
             File.AppendAllText(_filename,
                 (_time++) +
                 "," +
-                intelligentEntity.Input.Object +
+                (intelligentEntity.Input.Object ?? "0") +
                 "," +
-                intelligentEntity.Output.Object +
+                (intelligentEntity.Output.Object ?? "False") +
                 "," +
                 intelligentEntity.Input.Contentment.Value +
                 ","+

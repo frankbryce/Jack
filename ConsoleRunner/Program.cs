@@ -1,12 +1,4 @@
-﻿using Jack.Environment.Entity;
-using Jack.Simulator;
-using Jack.Simulator.Printers;
-using System.Configuration;
-using Ninject;
-using Jack;
-using Jack.Environment;
-using System.Collections.Generic;
-using System.IO;
+﻿using Ninject;
 
 namespace ConsoleRunner
 {
@@ -17,7 +9,7 @@ namespace ConsoleRunner
             var kernel = Bootstrapper.Bootstrap();
 
             var benchmarker = kernel.Get<Benchmarker>();
-            benchmarker.Run(200);
+            benchmarker.Run(5000);
         }
     }
 }

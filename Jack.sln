@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jack.Model", "Model\Jack.Mo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jack.Utility", "Utility\Jack.Utility.csproj", "{54D16A7D-C918-4B15-A06C-778463373C85}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jack.Model.Test", "Jack.Model.Test\Jack.Model.Test.csproj", "{FEEBDC54-E3CB-4918-9861-C1C3554115D3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{54D16A7D-C918-4B15-A06C-778463373C85}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54D16A7D-C918-4B15-A06C-778463373C85}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{54D16A7D-C918-4B15-A06C-778463373C85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEEBDC54-E3CB-4918-9861-C1C3554115D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEEBDC54-E3CB-4918-9861-C1C3554115D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEEBDC54-E3CB-4918-9861-C1C3554115D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEEBDC54-E3CB-4918-9861-C1C3554115D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

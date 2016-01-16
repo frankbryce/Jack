@@ -22,10 +22,10 @@ namespace Jack.Utility
         public static Hash With<T>(params T[] objs)
         {
             Hash hash = 1;
-            return hash.And(objs);
+            return hash.AndWith(objs);
         }
 
-        public Hash And<T>(params T[] objs)
+        public Hash AndWith<T>(params T[] objs)
         {
             var hash = new Hash(Value);
             foreach (var obj in objs)

@@ -10,16 +10,20 @@ namespace Jack.Entity
             get
             {
                 var hash = Hash.With(Input.Object)
-                    .And(Output.Object);
+                    .AndWith(Output.Object);
                 if (_subEntities.Any())
                 {
-                    hash = hash.And(_subEntities.Select(x => x.Output.Object).ToArray());
+                    hash = hash.AndWith(_subEntities.Select(x => x.Output.Object).ToArray());
                 }
                 return hash;
             }
         }
 
-        public InputOutputJack(params IntelligentEntity<int, bool>[] subEntities) : base(subEntities)
+        public InputOutputJack(int bufferSize, params IntelligentEntity<int, bool>[] subEntities) : base(bufferSize, subEntities)
+        {
+        }
+
+        public InputOutputJack(params IntelligentEntity<int, bool>[] subEntities) : this(0, subEntities)
         {
         }
     }

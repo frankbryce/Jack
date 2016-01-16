@@ -47,10 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entity\BaseJack.cs" />
-    <Compile Include="Entity\Buffer\BaseBufferJack.cs" />
-    <Compile Include="Entity\Buffer\InputBufferJack.cs" />
-    <Compile Include="Entity\Buffer\InputOutputBufferJack.cs" />
-    <Compile Include="Entity\Buffer\OutputBufferJack.cs" />
+    <Compile Include="Entity\MemoryJack.cs" />
     <Compile Include="Entity\InputOutputJack.cs" />
     <Compile Include="Entity\OutputJack.cs" />
     <Compile Include="Entity\InputJack.cs" />

@@ -12,13 +12,17 @@ namespace Jack.Entity
                 var hash = Hash.With(Input.Object);
                 if (_subEntities.Any())
                 {
-                    hash = hash.And(_subEntities.Select(x => x.Output.Object).ToArray());
+                    hash = hash.AndWith(_subEntities.Select(x => x.Output.Object).ToArray());
                 }
                 return hash;
             }
         }
 
-        public InputJack(params IntelligentEntity<int, bool>[] subEntities) : base(subEntities)
+        public InputJack(int bufferSize, params IntelligentEntity<int, bool>[] subEntities) : base(bufferSize, subEntities)
+        {
+        }
+
+        public InputJack(params IntelligentEntity<int, bool>[] subEntities) : this(0, subEntities)
         {
         }
     }

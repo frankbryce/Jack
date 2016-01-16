@@ -6,12 +6,13 @@ namespace Jack.Environment.Entity
     public class StatefulEnvironment2 : EnvironmentEntity<int, bool>
     {
         private InternalState state = InternalState.SadPlace;
-        private bool goodOutput = false;
+        private readonly bool[] outputs = { false, false, true, true };
+        private int goodidx = 0;
         private readonly int numStates = Enum.GetValues(typeof(InternalState)).Length;
 
         protected override IntelligenceInput NextInput()
         {
-            if (Output.Object == goodOutput) {
+            if (Output.Object == outputs[goodidx]) {
                 state = (InternalState)(Math.Min((int)(state + 1), numStates));
             }
             else
@@ -19,15 +20,15 @@ namespace Jack.Environment.Entity
                 state = (InternalState)(Math.Max((int)(state - 1), 1));
             }
             // toggle it
-            goodOutput = !goodOutput;
+            goodidx = (goodidx + 1) % outputs.Length;
 
             switch (state)
             {
-                case InternalState.Intermediate1:
-                case InternalState.Intermediate3:
-                case InternalState.Intermediate2:
-                case InternalState.Intermediate4:
-                    return new IntelligenceInput { Object = 5, Contentment = 0.5 };
+                //case InternalState.Intermediate1:
+                //case InternalState.Intermediate3:
+                //case InternalState.Intermediate2:
+                //case InternalState.Intermediate4:
+                //    return new IntelligenceInput { Object = 5, Contentment = 0.5 };
 
                 case InternalState.HappyPlace:
                     return new IntelligenceInput { Object = 1, Contentment = 1.0 };
@@ -41,16 +42,16 @@ namespace Jack.Environment.Entity
         public override void Reset()
         {
             state = InternalState.SadPlace;
-            goodOutput = false;
+            goodidx = 0;
         }
 
         private enum InternalState
         {
             SadPlace=1,
-            Intermediate1,
-            Intermediate2,
-            Intermediate3,
-            Intermediate4,
+            //Intermediate1,
+            //Intermediate2,
+            //Intermediate3,
+            //Intermediate4,
             HappyPlace
         }
     }

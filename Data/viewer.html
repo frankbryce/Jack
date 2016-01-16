@@ -42,6 +42,19 @@
                 var IntelRow = arrayData[arrayData.length-1];
                 var Intel = IntelRow[IntelRow.length-1];
                 barArrayData.push([i+","+j, Intel]);
+          
+                // Create the data table.
+                var linedata = new google.visualization.arrayToDataTable(arrayData);
+                
+                // Set chart options
+                var lineoptions = {
+                  title: 'Jack vs Time',
+                  legend: { position: 'bottom' }
+                };
+                
+                // Instantiate and draw our chart, passing in some options.
+                var linechart = new google.visualization.LineChart(document.getElementById(i+'_'+j));
+                linechart.draw(linedata, lineoptions);
               },
               dataType: 'text',
               async: false
@@ -68,5 +81,30 @@
   <body>
     <!--Div that will hold the chart-->
     <div id="chart_div" style="width: 1000px; height: 800px"></div>
+    <div id="0_0" style="width: 1000px; height: 800px"></div>
+    <div id="0_1" style="width: 1000px; height: 800px"></div>
+    <div id="0_2" style="width: 1000px; height: 800px"></div>
+    <div id="0_3" style="width: 1000px; height: 800px"></div>
+    <div id="0_4" style="width: 1000px; height: 800px"></div>
+    <div id="1_0" style="width: 1000px; height: 800px"></div>
+    <div id="1_1" style="width: 1000px; height: 800px"></div>
+    <div id="1_2" style="width: 1000px; height: 800px"></div>
+    <div id="1_3" style="width: 1000px; height: 800px"></div>
+    <div id="1_4" style="width: 1000px; height: 800px"></div>
+    <div id="2_0" style="width: 1000px; height: 800px"></div>
+    <div id="2_1" style="width: 1000px; height: 800px"></div>
+    <div id="2_2" style="width: 1000px; height: 800px"></div>
+    <div id="2_3" style="width: 1000px; height: 800px"></div>
+    <div id="2_4" style="width: 1000px; height: 800px"></div>
+    <div id="3_0" style="width: 1000px; height: 800px"></div>
+    <div id="3_1" style="width: 1000px; height: 800px"></div>
+    <div id="3_2" style="width: 1000px; height: 800px"></div>
+    <div id="3_3" style="width: 1000px; height: 800px"></div>
+    <div id="3_4" style="width: 1000px; height: 800px"></div>
+    <div id="4_0" style="width: 1000px; height: 800px"></div>
+    <div id="4_1" style="width: 1000px; height: 800px"></div>
+    <div id="4_2" style="width: 1000px; height: 800px"></div>
+    <div id="4_3" style="width: 1000px; height: 800px"></div>
+    <div id="4_4" style="width: 1000px; height: 800px"></div>
   </body>
 </html>
