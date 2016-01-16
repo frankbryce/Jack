@@ -5,17 +5,14 @@ namespace Jack.Entity
 {
     public class InputJack : BaseJack
     {
-        public override Hash State
+        protected override Hash GetState()
         {
-            get
+            var hash = Hash.With(Input.Object);
+            if (_subEntities.Any())
             {
-                var hash = Hash.With(Input.Object);
-                if (_subEntities.Any())
-                {
-                    hash = hash.AndWith(_subEntities.Select(x => x.Output.Object).ToArray());
-                }
-                return hash;
+                hash = hash.AndWith(_subEntities.Select(x => x.Output.Object).ToArray());
             }
+            return hash;
         }
 
         public InputJack(int bufferSize, params BaseJack[] subEntities) : base(bufferSize, subEntities)

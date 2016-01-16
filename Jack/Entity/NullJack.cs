@@ -5,17 +5,14 @@ namespace Jack.Entity
 {
     public class NullJack : BaseJack
     {
-        public override Hash State
+        protected override Hash GetState()
         {
-            get
+            Hash hash = 1;
+            if (_subEntities.Any())
             {
-                Hash hash = 1;
-                if (_subEntities.Any())
-                {
-                    hash = hash.AndWith(_subEntities.Select(x => x.State).ToArray());
-                }
-                return hash;
+                hash = hash.AndWith(_subEntities.Select(x => x.State).ToArray());
             }
+            return hash;
         }
 
         public NullJack(int bufferSize, params BaseJack[] subEntities) : base(bufferSize, subEntities)

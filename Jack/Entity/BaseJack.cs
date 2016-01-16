@@ -48,7 +48,7 @@ namespace Jack.Entity
             _inputBuffer.Add(Input); // If size 0, essentially a no-op
 
             // get hash and add lookup if one doesn't exist yet
-            var hash = State;
+            var hash = State = GetState();
             var hashIfTrue = hash.AndWith(true);
             var hashIfFalse = hash.AndWith(false);
             if (!_outLookup.ContainsKey(hashIfTrue))
@@ -85,6 +85,7 @@ namespace Jack.Entity
             return output;
         }
 
-        public abstract Hash State { get; }
+        protected abstract Hash GetState();
+        public Hash State { get; private set; }
     }
 }

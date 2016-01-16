@@ -8,19 +8,16 @@ namespace Jack.Entity
         private CacheList<Hash> _inOutHashMemory;
         private int _hashMemorySize;
 
-        public override Hash State
+        protected override Hash GetState()
         {
-            get
+            var hash = Hash.With(Input.Object)
+                .AndWith(Output.Object);
+            if (_subEntities.Any())
             {
-                var hash = Hash.With(Input.Object)
-                    .AndWith(Output.Object);
-                if (_subEntities.Any())
-                {
-                    hash = hash.AndWith(_subEntities.Select(x => x.Output.Object).ToArray());
-                }
-                _inOutHashMemory.Add(hash);
-                return Hash.With(_inOutHashMemory.ToArray());
+                hash = hash.AndWith(_subEntities.Select(x => x.Output.Object).ToArray());
             }
+            _inOutHashMemory.Add(hash);
+            return Hash.With(_inOutHashMemory.ToArray());
         }
 
         public override void Reset()
