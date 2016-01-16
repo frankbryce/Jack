@@ -7,12 +7,9 @@ namespace Jack.Entity
     {
         protected override Hash GetState()
         {
-            var hash = Hash.With(Input.Object)
-                    .AndWith(Output.Object);
-            if (_subEntities.Any())
-            {
-                hash = hash.AndWith(_subEntities.Select(x => x.Output.Object).ToArray());
-            }
+            var hash = Hash.With(base.GetState())
+                .AndWith(Input.Object)
+                .AndWith(Output.Object);
             return hash;
         }
 

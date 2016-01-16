@@ -25,6 +25,17 @@ namespace ConsoleRunner
             _environments = environments;
             _simulator = simulator;
             _datafileLocation = ConfigurationManager.AppSettings["DataFolderLocation"];
+
+            // delete all previous results for fresh viewer
+            for (int i = 0; ; i++) {
+                try {
+                    Directory.Delete(_datafileLocation + i, true);
+                }
+                catch (DirectoryNotFoundException)
+                {
+                    break;
+                }
+            }
         }
 
         public void Run()

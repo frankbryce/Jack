@@ -9,10 +9,6 @@ namespace Jack.Model.Test
     [TestClass]
     public class HashTest
     {
-        public interface IObject
-        {
-        }
-
         [TestMethod]
         public void CommutativeProperty()
         {
@@ -53,6 +49,84 @@ namespace Jack.Model.Test
             hash3 = hash1.AndWith(hash1);
 
             Assert.AreEqual(hash2, hash3);
+        }
+
+        [TestMethod]
+        public void ArraysAndVariableParamsAreTheSame()
+        {
+            var hash1 = Hash.With(new[] { 1234, 5678 });
+            var hash2 = Hash.With(1234, 5678);
+            Assert.AreEqual(hash1, hash2);
+        }
+
+        [TestMethod]
+        public void VariableAndFluentCallsAreTheSame()
+        {
+            var hash1 = Hash.With(1234, 5678);
+            var hash2 = Hash.With(1234).AndWith(5678);
+            Assert.AreEqual(hash1, hash2);
+        }
+
+        [TestMethod]
+        public void ArrayAndFluentCallsAreTheSame()
+        {
+            var hash1 = Hash.With(new[] { 1234, 5678 });
+            var hash2 = Hash.With(1234).AndWith(5678);
+            Assert.AreEqual(hash1, hash2);
+        }
+
+        [TestMethod]
+        public void HashWithIdentityAndWithObjectEqualsIdentityWithObject()
+        {
+            Hash hash = Hash.Identity;
+            var hash1 = hash.AndWith(5678);
+            var hash2 = Hash.With(hash).AndWith(5678);
+            Assert.AreEqual(hash1, hash2);
+        }
+
+        [TestMethod]
+        public void HashWithObjectAndWithIdentityEqualsIdentityWithObject()
+        {
+            var hash1 = Hash.Identity.AndWith(5678);
+            var hash2 = Hash.With(5678).AndWith(Hash.Identity);
+            Assert.AreEqual(hash1, hash2);
+        }
+
+        [TestMethod]
+        public void HashWithObjectAndWithIdentityEqualsObjectWithIdentity()
+        {
+            var hash1 = Hash.FromInt(5678).AndWith(Hash.Identity);
+            var hash2 = Hash.With(5678).AndWith(Hash.Identity);
+            Assert.AreEqual(hash1, hash2);
+        }
+
+        [TestMethod]
+        public void ComplexIdentityHashingTest()
+        {
+            Assert.AreEqual(Hash.Identity.AndWith(5678).AndWith(Hash.Identity).AndWith(1234).AndWith(Hash.Identity),
+                            Hash.With(5678).AndWith(1234));
+        }
+
+        [TestMethod]
+        public void HashIdentityWithIdentityEqualsIdentity()
+        {
+            var hash1 = Hash.With(Hash.Identity);
+            var hash2 = Hash.Identity.AndWith(Hash.Identity);
+
+            Assert.AreEqual(hash1, Hash.Identity);
+            Assert.AreEqual(hash2, Hash.Identity);
+        }
+
+        [TestMethod]
+        public void ValueOfIdentityIsNotEqualToIdentity()
+        {
+            Assert.AreNotEqual(Hash.FromInt(Hash.Identity), Hash.Identity);
+        }
+
+        [TestMethod]
+        public void IdentityEqualsIdentity()
+        {
+            Assert.AreEqual(Hash.Identity, Hash.Identity);
         }
     }
 }

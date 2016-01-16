@@ -20,6 +20,7 @@ namespace Jack.Entity
             _outLookup = new Dictionary<Hash, CacheList<Contentment>>();
             _inputBuffer = new CacheList<IntelligenceInput<int>>(bufferSize);
             _hashMemory = new CacheList<Hash>(_roundTripDelay);
+            Reset();
         }
 
         public override void Reset()
@@ -27,6 +28,7 @@ namespace Jack.Entity
             _outLookup.Clear();
             _hashMemory.Clear();
             _inputBuffer.Clear();
+            State = default(Hash);
 
             foreach (var subEntity in _subEntities)
             {
@@ -85,7 +87,16 @@ namespace Jack.Entity
             return output;
         }
 
-        protected abstract Hash GetState();
+        protected virtual Hash GetState()
+        {
+            var hash = Hash.Identity;
+            if (_subEntities.Any())
+            {
+                hash = hash.AndWith(_subEntities.Select(x => x.Output.Object).ToArray());
+            }
+            return hash;
+        }
+
         public Hash State { get; private set; }
     }
 }
