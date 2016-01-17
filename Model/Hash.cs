@@ -45,7 +45,7 @@ namespace Jack.Utility
             foreach (var obj in objs)
             {
                 if (typeof(T) == typeof(Hash) && Identity.Equals(obj)) continue;
-                hash = hash.HashFunc(new Hash(obj.GetHashCode()));
+                hash = hash.HashFunc(obj.GetHashCode());
             }
             return hash;
         }
@@ -55,15 +55,19 @@ namespace Jack.Utility
             if (h1 == Identity) return this;
             if (this == Identity) return h1;
 
-            var i = randomHash[0][((h1 & 0xF0000000) >> 28)] << 28
-                  | randomHash[1][((h1 & 0x0F000000) >> 24)] << 24
-                  | randomHash[2][((h1 & 0x00F00000) >> 20)] << 20
-                  | randomHash[3][((h1 & 0x000F0000) >> 16)] << 16
-                  | randomHash[4][((h1 & 0x0000F000) >> 12)] << 12
-                  | randomHash[5][((h1 & 0x00000F00) >> 8 )] << 8
-                  | randomHash[6][((h1 & 0x000000F0) >> 4 )] << 4
-                  | randomHash[7][((h1 & 0x0000000F) >> 0 )] << 0;
+            var i = Jumble(Jumble(h1));
             return (i - this);
+        }
+        private int Jumble(int h1)
+        {
+            return randomHash[0][(h1 & 0xF0000000) >> 28] << 28
+                 | randomHash[1][(h1 & 0x0F000000) >> 24] << 24
+                 | randomHash[2][(h1 & 0x00F00000) >> 20] << 20
+                 | randomHash[3][(h1 & 0x000F0000) >> 16] << 16
+                 | randomHash[4][(h1 & 0x0000F000) >> 12] << 12
+                 | randomHash[5][(h1 & 0x00000F00) >> 8] << 8
+                 | randomHash[6][(h1 & 0x000000F0) >> 4] << 4
+                 | randomHash[7][(h1 & 0x0000000F) >> 0] << 0;
         }
 
         public override int GetHashCode()

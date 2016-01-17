@@ -17,6 +17,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jack.Utility", "Utility\Jac
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jack.Model.Test", "Jack.Model.Test\Jack.Model.Test.csproj", "{FEEBDC54-E3CB-4918-9861-C1C3554115D3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jack.Test", "Jack.Test\Jack.Test.csproj", "{8EA0A58B-E31E-42DF-81B0-44505B99E173}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{DEA3C798-BB65-4F8D-9CC3-C30126BAE7A6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,8 +55,16 @@ Global
 		{FEEBDC54-E3CB-4918-9861-C1C3554115D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FEEBDC54-E3CB-4918-9861-C1C3554115D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FEEBDC54-E3CB-4918-9861-C1C3554115D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EA0A58B-E31E-42DF-81B0-44505B99E173}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EA0A58B-E31E-42DF-81B0-44505B99E173}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EA0A58B-E31E-42DF-81B0-44505B99E173}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EA0A58B-E31E-42DF-81B0-44505B99E173}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FEEBDC54-E3CB-4918-9861-C1C3554115D3} = {DEA3C798-BB65-4F8D-9CC3-C30126BAE7A6}
+		{8EA0A58B-E31E-42DF-81B0-44505B99E173} = {DEA3C798-BB65-4F8D-9CC3-C30126BAE7A6}
 	EndGlobalSection
 EndGlobal

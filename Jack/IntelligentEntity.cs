@@ -18,6 +18,8 @@ namespace Jack
                     "alpha needs to be between 0 and 1, not inclusive");
             }
             Alpha = alpha;
+            Output = default(IntelligenceOutput);
+            Input = default(IntelligenceInput);
         }
 
         public void Step(IntelligenceInput input)
@@ -34,7 +36,11 @@ namespace Jack
         public virtual IntelligenceInput Input { get; protected set; }
         public virtual Contentment Contentment { get; private set; }
 
-        public abstract void Reset();
+        public virtual void Reset()
+        {
+            Output = default(IntelligenceOutput);
+            Input = default(IntelligenceInput);
+        }
         protected abstract void Iterate();
     }
 

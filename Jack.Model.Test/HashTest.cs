@@ -138,6 +138,8 @@ namespace Jack.Model.Test
             var hash1 = Hash.FromInt(0).AndWith(1234);
             var hash2 = Hash.With(1234);
             Assert.AreNotEqual(hash1, hash2);
+            Assert.AreNotEqual(Hash.FromInt(0), Hash.Identity);
+            Assert.IsFalse(Hash.FromInt(0) == Hash.Identity);
         }
 
         [TestMethod]

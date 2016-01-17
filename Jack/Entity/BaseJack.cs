@@ -25,6 +25,8 @@ namespace Jack.Entity
 
         public override void Reset()
         {
+            base.Reset();
+
             foreach (var subEntity in _subEntities)
             {
                 subEntity.Reset();
