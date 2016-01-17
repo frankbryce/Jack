@@ -32,6 +32,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,63 +46,10 @@
     <Compile Include="Intelligence.cs" />
     <Compile Include="IntelligenceInput.cs" />
     <Compile Include="IntelligenceOutput.cs" />
-    <Compile Include="NInt\Int1.cs" />
-    <Compile Include="NInt\Int10.cs" />
-    <Compile Include="NInt\Int11.cs" />
-    <Compile Include="NInt\Int12.cs" />
-    <Compile Include="NInt\Int13.cs" />
-    <Compile Include="NInt\Int14.cs" />
-    <Compile Include="NInt\Int15.cs" />
-    <Compile Include="NInt\Int16.cs" />
-    <Compile Include="NInt\Int17.cs" />
-    <Compile Include="NInt\Int18.cs" />
-    <Compile Include="NInt\Int19.cs" />
-    <Compile Include="NInt\Int2.cs" />
-    <Compile Include="NInt\Int20.cs" />
-    <Compile Include="NInt\Int21.cs" />
-    <Compile Include="NInt\Int22.cs" />
-    <Compile Include="NInt\Int23.cs" />
-    <Compile Include="NInt\Int24.cs" />
-    <Compile Include="NInt\Int25.cs" />
-    <Compile Include="NInt\Int26.cs" />
-    <Compile Include="NInt\Int27.cs" />
-    <Compile Include="NInt\Int28.cs" />
-    <Compile Include="NInt\Int29.cs" />
-    <Compile Include="NInt\Int3.cs" />
-    <Compile Include="NInt\Int30.cs" />
-    <Compile Include="NInt\Int31.cs" />
-    <Compile Include="NInt\Int32.cs" />
-    <Compile Include="NInt\Int4.cs" />
-    <Compile Include="NInt\Int5.cs" />
-    <Compile Include="NInt\Int6.cs" />
-    <Compile Include="NInt\Int7.cs" />
-    <Compile Include="NInt\Int8.cs" />
-    <Compile Include="NInt\Int9.cs" />
-    <Compile Include="NInt\NInt.cs" />
-    <Compile Include="NInt\NInt1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>NInt.tt</DependentUpon>
-    </Compile>
-    <Compile Include="NInt\SaveOutput.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SaveOutput.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="NInt\NInt.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>NInt1.cs</LastGenOutput>
-    </Content>
-    <Content Include="NInt\SaveOutput.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>SaveOutput.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

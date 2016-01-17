@@ -25,14 +25,12 @@ namespace Jack.Utility
         public static bool operator ==(Hash h1, Hash h2) => h1.Equals(h2);
         public bool Equals(Hash h)
         {
-            long myValue = ((_isIdentity ? 0x1 : 0x0) << 31) + _value;
-            long theirValue = ((h._isIdentity ? 0x1 : 0x0) << 31) + h._value;
-            return myValue == theirValue;
+            return h._value == _value && h._isIdentity == _isIdentity;
         }
         public override bool Equals(object h)
         {
             if (h.GetType() != typeof(Hash)) { return false; }
-            return Equals((Hash)h);
+            return Equals((Hash) h);
         }
         public static Hash Identity => new Hash(0, IsIdentity: true);
 
@@ -47,18 +45,25 @@ namespace Jack.Utility
             foreach (var obj in objs)
             {
                 if (typeof(T) == typeof(Hash) && Identity.Equals(obj)) continue;
-                hash = HashFunc(new Hash(obj.GetHashCode()), hash);
+                hash = hash.HashFunc(new Hash(obj.GetHashCode()));
             }
             return hash;
         }
 
-        private static Hash HashFunc(Hash h1, Hash h2)
+        private Hash HashFunc(Hash h1)
         {
-            if (h1 == Identity) return h2;
-            if (h2 == Identity) return h1;
+            if (h1 == Identity) return this;
+            if (this == Identity) return h1;
 
-            if (h1 == h2) h1 = -h2;
-            return (h1 - h2);
+            var i = randomHash[0][((h1 & 0xF0000000) >> 28)] << 28
+                  | randomHash[1][((h1 & 0x0F000000) >> 24)] << 24
+                  | randomHash[2][((h1 & 0x00F00000) >> 20)] << 20
+                  | randomHash[3][((h1 & 0x000F0000) >> 16)] << 16
+                  | randomHash[4][((h1 & 0x0000F000) >> 12)] << 12
+                  | randomHash[5][((h1 & 0x00000F00) >> 8 )] << 8
+                  | randomHash[6][((h1 & 0x000000F0) >> 4 )] << 4
+                  | randomHash[7][((h1 & 0x0000000F) >> 0 )] << 0;
+            return (i - this);
         }
 
         public override int GetHashCode()
@@ -75,5 +80,16 @@ namespace Jack.Utility
         {
             return Clone();
         }
+
+        private static byte[][] randomHash => new byte[][] {
+            new byte[] { 11, 8, 10, 15, 13, 0, 3, 14, 9, 6, 4, 2, 7, 1, 5, 12 },
+            new byte[] { 3, 5, 11, 15, 7, 8, 0, 13, 9, 10, 4, 14, 1, 12, 6, 2 },
+            new byte[] { 4, 2, 0, 13, 9, 7, 14, 12, 15, 3, 5, 10, 11, 8, 1, 6 },
+            new byte[] { 0, 12, 1, 3, 10, 2, 6, 8, 9, 14, 5, 11, 7, 13, 15, 4 },
+            new byte[] { 6, 10, 2, 14, 15, 9, 4, 12, 1, 5, 13, 7, 0, 3, 8, 11 },
+            new byte[] { 8, 6, 10, 11, 5, 13, 14, 12, 7, 3, 1, 9, 4, 15, 2, 0 },
+            new byte[] { 10, 14, 13, 11, 9, 15, 5, 8, 3, 1, 0, 12, 2, 4, 6, 7 },
+            new byte[] { 4, 9, 14, 15, 0, 5, 11, 2, 1, 7, 8, 13, 6, 10, 12, 3 }
+        };
     }
 }
