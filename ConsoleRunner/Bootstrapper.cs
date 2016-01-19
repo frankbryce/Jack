@@ -19,7 +19,7 @@ namespace ConsoleRunner
             var kernel = new StandardKernel();
 
             // number of timesteps per simulation
-            kernel.Bind<int>().ToConstant(150)
+            kernel.Bind<int>().ToConstant(500)
                 .WhenInjectedInto<IntelligentEntitySimulator>();
 
             // line up our entities

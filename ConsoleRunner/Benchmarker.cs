@@ -8,7 +8,6 @@ using System.IO;
 
 namespace ConsoleRunner
 {
-
     public class Benchmarker
     {
         private readonly string _datafileLocation;
